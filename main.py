@@ -1,13 +1,17 @@
 def encode(password):
     encoded = ""
     for letter in password:
-        encoded += str(int(letter)+3)
+        new_digit = (int(letter) + 3) % 10 
+        encoded += str(new_digit)
     return encoded
 
 def decode(encoded_password):
     decoded = ""
     for letter in encoded_password:
-        decoded += str(int(letter) - 3)
+        new_digit = (int(letter) - 3)  
+        if new_digit < 0:  
+            new_digit += 10
+        decoded += str(new_digit)
     return decoded
 
 
@@ -28,7 +32,6 @@ if __name__ == "__main__":
             print("Your password has been encoded and stored!")
             print("")
 
-        # Add menu option 2 (decoder) option here
         elif menu_option == 2:
             if last_encoded_password:
                 decoded_password = decode(last_encoded_password)
