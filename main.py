@@ -4,8 +4,15 @@ def encode(password):
         encoded += str(int(letter)+3)
     return encoded
 
+def decode(encoded_password):
+    decoded = ""
+    for letter in encoded_password:
+        decoded += str(int(letter) - 3)
+    return decoded
+
 
 if __name__ == "__main__":
+    last_encoded_password = None
     while True:
         print("Menu")
         print("-------------")
@@ -17,11 +24,18 @@ if __name__ == "__main__":
 
         if menu_option == 1:
             password = input("Please enter your password to encode: ")
-            encoded_password = encode(password)
+            last_encoded_password = encode(password)
             print("Your password has been encoded and stored!")
             print("")
 
         # Add menu option 2 (decoder) option here
-
+        elif menu_option == 2:
+            if last_encoded_password:
+                decoded_password = decode(last_encoded_password)
+                print(f"The encoded password is {last_encoded_password}, and the original password is {decoded_password}")
+                print("")
+            else:
+                print("No encoded password found. Please encode a password first.")
+                print("")
         elif menu_option == 3:
             break
